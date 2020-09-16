@@ -29,7 +29,26 @@
         "extensions": [".tsx"]
       }
     ],
-    "import/prefer-default-export": "off"
+    "no-nested-ternary": "off",
+    "no-useless-constructor": "off",
+    "import/prefer-default-export": "off",
+    "import/no-named-as-default-member": "off",
+    "import/no-unresolved": "off",
+    "import/extensions": "off",
+    "import/named": "off",
+    "import/no-extraneous-dependencies": "off",
+    "import/no-duplicates": "off",
+    "import/order": "off",
+    "import/no-self-import": "off",
+    "import/no-cycle": "off",
+    "import/no-useless-path-segments": "off",
+    "import/no-named-as-default": "off",
+    "object-curly-newline": "off",
+    "no-use-before-define": "off",
+    "@typescript-eslint/no-use-before-define": [
+      "error",
+      { "functions": false, "typedefs": false }
+    ]
   },
   "settings": {
     "import/parsers": {
