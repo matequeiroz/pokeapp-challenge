@@ -2,6 +2,8 @@
 
 Esse projeto se trata de um desafio.
 
+![alt text](https://raw.githubusercontent.com/matequeiroz/pokeapp-challenge/master/src/assets/demo.png)
+
 ## Objetivo
 
 Tem como objetivo desenvolver um app web que consome a [API](https://pokeapi.co/) de personagens do game Pokémon.
@@ -39,7 +41,7 @@ npm test
 - Typescript
 - Styled-Components
 - React Router
-- Axios 
+- Axios
 - Jest
 
 Feito por [Mateus Queiroz](https://www.linkedin.com/in/mateusrobertoqueiroz/) 👨🏻‍💻
