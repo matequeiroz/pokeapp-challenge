@@ -1,11 +1,16 @@
 import { Reducer } from 'redux';
 
-import { PokemonState, PokemonTypes } from './types';
+import { PokemonState, PokemonTypes, PokemonDetail } from './types';
 /**
  * @description initial state of reducer pokemon
  */
 const INITIAL_STATE: PokemonState = {
-  data: [],
+  data: {
+    count: 0,
+    next: '',
+    previous: '',
+    results: [],
+  },
   error: false,
   loading: true,
 };
@@ -28,9 +33,36 @@ const reducer: Reducer<PokemonState> = (state = INITIAL_STATE, action) => {
     case PokemonTypes.GET_POKEMON_ALL_SUCCESS: {
       return {
         ...state,
-        loading: false,
         data: action.payload,
-        error: false,
+      };
+    }
+
+    case PokemonTypes.GET_POKEMON_DETAILS_SUCCESS: {
+      const newState = [...state.data.results];
+
+      action.payload.map(
+        ({ name, abilities, height, photo, weight, types }: PokemonDetail) => {
+          newState.find(item => {
+            if (item.name === name) {
+              item.detail = {
+                name,
+                abilities,
+                height,
+                photo,
+                weight,
+                types,
+              };
+            }
+          });
+        },
+      );
+
+      return {
+        ...state,
+        data: {
+          ...state.data,
+          results: newState,
+        },
       };
     }
 
