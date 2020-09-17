@@ -32,4 +32,14 @@ npm build
 npm test
 ```
 
+## Tecnologias Usadas
+
+- React
+- Redux
+- Typescript
+- Styled-Components
+- React Router
+- Axios 
+- Jest
+
 Feito por [Mateus Queiroz](https://www.linkedin.com/in/mateusrobertoqueiroz/) 👨🏻‍💻
