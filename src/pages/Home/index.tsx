@@ -3,8 +3,11 @@ import { useSelector, useDispatch } from 'react-redux';
 import { Grid } from '@material-ui/core';
 
 import { StoreState } from '../../store';
-import { loadPokemonRequest } from '../../store/pokemon/actions';
-import { Container } from './styles';
+import {
+  loadPokemonRequest,
+  getNextPageRequest,
+} from '../../store/pokemon/actions';
+import { Container, ButtonSearchContainer } from './styles';
 import CardPokemon from '../../components/CardPokemon';
 
 const Home: React.FC = () => {
@@ -15,8 +18,39 @@ const Home: React.FC = () => {
     dispatch(loadPokemonRequest());
   }, [dispatch]);
 
+  const handleNextPage = () => {
+    const { next } = pokemon.data;
+    dispatch(getNextPageRequest(next));
+  };
+
+  const handlePreviousPage = () => {
+    const { previous } = pokemon.data;
+    if (previous) {
+      dispatch(getNextPageRequest(previous));
+    }
+  };
+
   return (
     <Container>
+      <Grid container>
+        <Grid item xs={12}>
+          <ButtonSearchContainer>
+            {pokemon.data.previous ? (
+              <button onClick={() => handlePreviousPage()} type="button">
+                Anterior
+              </button>
+            ) : (
+              <button disabled type="button">
+                Anterior
+              </button>
+            )}
+
+            <button onClick={() => handleNextPage()} type="button">
+              Próxima
+            </button>
+          </ButtonSearchContainer>
+        </Grid>
+      </Grid>
       <Grid container>
         {pokemon.data.results.map(pokemonItem => (
           <CardPokemon

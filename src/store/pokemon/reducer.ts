@@ -12,7 +12,7 @@ const INITIAL_STATE: PokemonState = {
     results: [],
   },
   error: false,
-  loading: true,
+  loading: false,
 };
 
 /**
@@ -39,7 +39,6 @@ const reducer: Reducer<PokemonState> = (state = INITIAL_STATE, action) => {
 
     case PokemonTypes.GET_POKEMON_DETAILS_SUCCESS: {
       const newState = [...state.data.results];
-
       action.payload.map(
         ({ name, abilities, height, photo, weight, types }: PokemonDetail) => {
           newState.find(item => {

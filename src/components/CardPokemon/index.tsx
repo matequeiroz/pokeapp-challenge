@@ -18,14 +18,18 @@ const CardPokemon = ({ detail, name, url }: CardPokemonProps) => (
       <CardContent>
         <Grid item xs={12}>
           <HeaderCard>
-            <img src={detail.photo.url} alt="teste" />
-            <h3>{detail.name}</h3>
+            <img
+              src={detail.photo.url}
+              alt="Pokemon"
+              data-testid="photo-pokemon"
+            />
+            <h3 data-testid="name-pokemon">{detail.name}</h3>
             <HeightAndWight>
-              <p>
+              <p data-testid="height-pokemon">
                 Altura: {detail.height}
                 cm
               </p>
-              <p>
+              <p data-testid="weight-pokemon">
                 Largura: {detail.weight}
                 cm
               </p>
@@ -38,7 +42,9 @@ const CardPokemon = ({ detail, name, url }: CardPokemonProps) => (
               <Abilities>
                 <h3>Habilidades</h3>
                 {detail.abilities.map(ability => (
-                  <p>{ability.ability.name}</p>
+                  <p data-testid="ability-pokemon" key={ability.ability.name}>
+                    {ability.ability.name}
+                  </p>
                 ))}
               </Abilities>
             </Grid>
@@ -47,7 +53,9 @@ const CardPokemon = ({ detail, name, url }: CardPokemonProps) => (
               <Types>
                 <h3>Tipos</h3>
                 {detail.types.map(type => (
-                  <p>{type}</p>
+                  <p data-testid="type-pokemon" key={type}>
+                    {type}
+                  </p>
                 ))}
               </Types>
             </Grid>
@@ -58,7 +66,12 @@ const CardPokemon = ({ detail, name, url }: CardPokemonProps) => (
             <h3>Formas</h3>
             <div>
               {detail.photo.forms.map(formUrl => (
-                <img src={formUrl} alt="teste" />
+                <img
+                  data-testid="forms-pokemon"
+                  key={formUrl}
+                  src={formUrl}
+                  alt="Formas Pokemon"
+                />
               ))}
             </div>
           </Forms>

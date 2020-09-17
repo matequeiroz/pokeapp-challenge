@@ -1,4 +1,5 @@
 import { call, put, all, takeLatest } from 'redux-saga/effects';
+import axios from 'axios';
 
 import api from '../../services/api';
 import { PokemonTypes, PokemonData, PokemonDetail } from './types';
@@ -7,6 +8,7 @@ import {
   loadPokemonAllFailed,
   loadPokemonDetailSuccess,
   loadPokemonDetailFailed,
+  getNextPageSuccess,
 } from './actions';
 
 interface PokemonDetailsData {
@@ -43,14 +45,35 @@ interface PokemonDetailsData {
   };
 }
 
-interface DataActionPayload {
-  type: string;
-  payload: PokemonData;
-}
-
 function* getAll() {
   try {
     const response: { data: PokemonData } = yield call(api.get, '/pokemon');
+    yield put(loadPokemonAllSuccess(response.data));
+    yield getInfo(response.data);
+  } catch (error) {
+    yield put(loadPokemonAllFailed());
+  }
+}
+
+function* getNextPage(action: any) {
+  try {
+    const response: { data: PokemonData } = yield call(
+      axios.get,
+      action.payload,
+    );
+    yield put(loadPokemonAllSuccess(response.data));
+    yield getInfo(response.data);
+  } catch (error) {
+    yield put(loadPokemonAllFailed());
+  }
+}
+
+function* getPrevious(action: any) {
+  try {
+    const response: { data: PokemonData } = yield call(
+      axios.get,
+      action.payload,
+    );
     yield put(loadPokemonAllSuccess(response.data));
     yield getInfo(response.data);
   } catch (error) {
@@ -107,4 +130,8 @@ const getForms = ({ data }: PokemonDetailsData): string[] => {
   return result;
 };
 
-export default all([takeLatest(PokemonTypes.GET_POKEMON_ALL_REQUEST, getAll)]);
+export default all([
+  takeLatest(PokemonTypes.GET_POKEMON_ALL_REQUEST, getAll),
+  takeLatest(PokemonTypes.GET_POKEMON_NEXT_PAGE_REQUEST, getNextPage),
+  takeLatest(PokemonTypes.GET_POKEMON_PREVIOUS_PAGE_REQUEST, getPrevious),
+]);

@@ -10,6 +10,12 @@ export enum PokemonTypes {
   GET_POKEMON_DETAILS_SUCCESS = '@pokemon/GET_REQUEST_DETAILS_SUCCESS',
   GET_POKEMON_DETAILS_FAILED = '@pokemon/GET_REQUEST_DETAILS_FAILED',
   GET_POKEMON_DETAILS_REQUEST = '@pokemon/GET_REQUEST_DETAILS_REQUEST',
+  GET_POKEMON_NEXT_PAGE_REQUEST = '@pokemon/GET_POKEMON_NEXT_PAGE_REQUEST',
+  GET_POKEMON_NEXT_PAGE_SUCCESS = '@pokemon/GET_POKEMON_NEXT_PAGE_SUCCESS',
+  GET_POKEMON_NEXT_PAGE_FAILED = '@pokemon/GET_POKEMON_NEXT_PAGE_FAILED',
+  GET_POKEMON_PREVIOUS_PAGE_REQUEST = '@pokemon/GET_POKEMON_PREVIOUS_PAGE_REQUEST',
+  GET_POKEMON_PREVIOUS_PAGE_SUCCESS = '@pokemon/GET_POKEMON_PREVIOUS_PAGE_SUCCESS',
+  GET_POKEMON_PREVIOUS_PAGE_FAILED = '@pokemon/GET_POKEMON_PREVIOUS_PAGE_FAILED',
 }
 
 export interface PokemonDetail {
@@ -39,7 +45,7 @@ export interface Pokemon {
 export interface PokemonData {
   results: Pokemon[];
   count: number;
-  next: string | null;
+  next: string;
   previous: string | null;
 }
 
